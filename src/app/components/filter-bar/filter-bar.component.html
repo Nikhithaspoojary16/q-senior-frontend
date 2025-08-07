@@ -1,1 +1,63 @@
-<p>filter-bar works!</p>
+<div class="filter-bar mat-elevation-z1">
+<div class="filter-fields">
+
+    <!-- Name Filter Field -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>{{ nameLabel }}</mat-label>
+      <input matInput [(ngModel)]="filters.name" (input)="onFiltersUpdated()" />
+      <!-- Clear Name Button -->
+      <button
+        *ngIf="filters.name"
+        mat-icon-button
+        matSuffix
+        aria-label="Clear"
+        class="clear-icon-button"
+        (click)="clearNameFilter()"
+      >
+        <mat-icon fontIcon="close"></mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- Type Filter Dropdown -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>{{ typeLabel }}</mat-label>
+      <mat-select [(ngModel)]="filters.types" (selectionChange)="onFiltersUpdated()" multiple>
+        <mat-option *ngFor="let type of availableTypes" [value]="type">
+          {{ type }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Currency Filter Dropdown -->
+    <mat-form-field appearance="fill" class="filter-field">
+      <mat-label>{{ currencyLabel }}</mat-label>
+      <mat-select [(ngModel)]="filters.currencies" (selectionChange)="onFiltersUpdated()" multiple>
+        <mat-option *ngFor="let currency of availableCurrencies" [value]="currency">
+          {{ currency }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Private Checkbox -->
+    <mat-checkbox
+      class="filter-checkbox"
+      [(ngModel)]="filters.isPrivate"
+      (change)="onFiltersUpdated()"
+    >
+      Private
+    </mat-checkbox>
+  </div>
+
+  <!-- Clear All Filter btton to clear the filter applied -->
+  <div class="filter-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      class="clear-button"
+      (click)="clearFilters()"
+      [disabled]="!isAnyFilterApplied()"
+    >
+      Clear All Filters
+    </button>
+  </div>
+</div>

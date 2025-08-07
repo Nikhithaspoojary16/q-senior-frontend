@@ -1,3 +1,74 @@
-:host {
-  display: block;
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  align-items: flex-end;
+
+  .filter-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    flex: 1;
+
+    .filter-field {
+      min-width: 200px;
+      flex: 1 1 200px;
+    }
+
+    .filter-checkbox {
+      align-self: center;
+    }
+  }
+
+  .filter-actions {
+    display: flex;
+    align-items: center;
+    padding-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+
+    .filter-actions {
+      justify-content: flex-end;
+    }
+  }
 }
+
+.clear-icon-button {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  line-height: 1;
+  margin-right: 4px;
+
+  mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+.clear-button {
+  background-color: #333; 
+  color: #fff;
+  font-weight: 500;
+
+  &:hover {
+    background-color: #000; 
+  }
+
+  &:disabled {
+    background-color: #999; 
+    color: #eee;
+    cursor: not-allowed;
+  }
+}
+
+

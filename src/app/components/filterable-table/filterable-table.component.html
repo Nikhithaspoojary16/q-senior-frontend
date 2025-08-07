@@ -1,17 +1,34 @@
-<!-- Feel free to replace this placeholder with your filterbar -->
 <fieldset class="filter-bar-placeholder">
-  <legend>Filter bar should go here</legend>
+  <app-filter-bar
+    (filterChange)="filterChange.emit($event)"
+    [availableCurrencies]="availableCurrencies"
+    [availableTypes]="availableTypes"
+    [nameLabel]="nameLabel"
+    [currencyLabel]="currencyLabel"
+    [typeLabel]="typeLabel"
+  ></app-filter-bar>
 </fieldset>
 
 <div class="table-wrapper">
-  @if(isLoading) {
-  <div class="loading-indicator">
-    <mat-spinner></mat-spinner>
-  </div>
 
+  <!-- Show loading spinner when isLoading is true -->
+  @if (isLoading) {
+    <div class="loading-indicator">
+      <mat-spinner></mat-spinner>
+    </div>
   }
 
   <table mat-table [dataSource]="dataSource ?? []" class="mat-elevation-z8">
     <ng-content></ng-content>
   </table>
+
+  <!-- Angular Material Paginator At the bottom of the table-->
+  <mat-paginator
+    [length]="totalCount"
+    [pageSize]="filter.limit || 10"
+    [pageIndex]="(filter.skip || 0) / (filter.limit || 10)"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+
 </div>
